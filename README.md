@@ -6,9 +6,9 @@
 
 # Confusables
 
-This library allows you to easily remove confusables from a string.
+This library allows you to easily remove confusables from a string, into normal english characters.
 
-> Confusables is currently in early development. Anything may change at any time. The public API should not be considered stable until version 1.0.0.
+Try it out: https://confusables.netlify.com/
 
 ## Installation
 
@@ -20,18 +20,37 @@ npm install confusables
 
 ## Usage
 
-```js
-const { remove, obfuscate } = require('confusables');
+### Removing confusables
 
-const weirdString = 'Ἢἕļľᦞ ш٥ṟｌᑰ! Hello World!';
+```ts
+const { remove } = require('confusables');
+import remove from 'confusables'; // with ES modules
 
-const normalString = remove(weirdString);
+remove('Ἢἕļľᦞ ш٥ṟｌᑰ! Hello World!'); // => Hello World! Hello World!
+remove('Iлｔèｒｎåｔïｏｎɑｌíƶａｔïǫԉ'); // => Internationalization
+```
 
-console.log(normalString); // Hello World! Hello World!
+### Injecting random confusables
+
+```ts
+const { obfuscate } = require('confusables');
+import { obfuscate } from 'confusables'; // with ES modules
+
+obfuscate('Hello World!'); // => Ḣé𝑙ŀ𝟶 Ꮤᴑ𝖗łᏧ
+obfuscate('Internationalization'); // => ᶦṅᵗᧉ𝘳𝓃ȧťί𝙾ቢค𝞲ἱƶ𝜶ナἰøŉ
+```
+
+### List of supported confusable characters
+
+```ts
+const { characters } = require('confusables');
+import { characters } from 'confusables'; // with ES modules
+
+console.log(characters);
 ```
 
 ## What are confusables?
 
->Confusable characters are those that may be confused with others (in some common UI fonts), such as the Latin letter "o" and the Greek letter omicron "ο". Fonts make a difference: for example, the Hebrew character "ס" looks confusingly similar to "o" in some fonts (such as Arial Hebrew), but not in others.
+> Confusable characters are those that may be confused with others (in some common UI fonts), such as the Latin letter "o" and the Greek letter omicron "ο". Fonts make a difference: for example, the Hebrew character "ס" looks confusingly similar to "o" in some fonts (such as Arial Hebrew), but not in others.
 
->[Source](https://unicode.org/cldr/utility/confusables.jsp)
+> [Source](https://unicode.org/cldr/utility/confusables.jsp)
