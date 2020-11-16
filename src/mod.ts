@@ -1,5 +1,5 @@
-import { characters } from './characters';
-import { clean, checkLNP } from './util';
+import { characters } from "./characters.ts";
+import { checkLNP, clean } from "./util.ts";
 
 /** The current cache of all the supported alphabet characters  */
 export const alphabetMap = new Map<string, string[]>();
@@ -11,11 +11,11 @@ export const confusablesMap = new Map<string, string>();
 export const removeCache = new Map<string, string>();
 
 for (const [base, alts] of characters.entries()) {
-	alphabetMap.set(base, [...alts]);
+  alphabetMap.set(base, [...alts]);
 
-	for (const char of alts) {
-		confusablesMap.set(char, base);
-	}
+  for (const char of alts) {
+    confusablesMap.set(char, base);
+  }
 }
 
 /**
@@ -23,19 +23,19 @@ for (const [base, alts] of characters.entries()) {
  * @param str The text to remove confusables from.
  */
 export function remove(str: string) {
-	const previous = removeCache.get(str);
-	if (typeof previous === 'string') return previous;
-	if (checkLNP(str)) return str;
+  const previous = removeCache.get(str);
+  if (typeof previous === "string") return previous;
+  if (checkLNP(str)) return str;
 
-	let newStr = '';
+  let newStr = "";
 
-	for (const char of clean(str)) {
-		newStr += confusablesMap.get(char) || char;
-	}
+  for (const char of clean(str)) {
+    newStr += confusablesMap.get(char) || char;
+  }
 
-	removeCache.set(str, newStr);
+  removeCache.set(str, newStr);
 
-	return newStr;
+  return newStr;
 }
 
 /**
@@ -43,15 +43,17 @@ export function remove(str: string) {
  * @param str The text to obfuscate.
  */
 export function obfuscate(str: string) {
-	let newStr = '';
+  let newStr = "";
 
-	for (const char of str) {
-		const charMap = alphabetMap.get(char);
-		newStr += charMap ? charMap[Math.floor(Math.random() * charMap.length)] : char;
-	}
+  for (const char of str) {
+    const charMap = alphabetMap.get(char);
+    newStr += charMap
+      ? charMap[Math.floor(Math.random() * charMap.length)]
+      : char;
+  }
 
-	return newStr;
+  return newStr;
 }
 
-export { characters, clean, checkLNP };
+export { characters, checkLNP, clean };
 export default remove;

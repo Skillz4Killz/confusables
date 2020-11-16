@@ -1,8 +1,0 @@
-{
-	"extends": "@favware/ts-config",
-	"compilerOptions": {
-		"declarationMap": true,
-		"importHelpers": false
-	},
-	"include": ["src"]
-}
