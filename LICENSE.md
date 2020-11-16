@@ -1,7 +1,7 @@
 # The MIT License (MIT)
 
 Copyright © `2019` `https://github.com/gc/`
-Copyright (c) 2019 Skillz4Killz
+Copyright (c) 2020 Skillz4Killz
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
